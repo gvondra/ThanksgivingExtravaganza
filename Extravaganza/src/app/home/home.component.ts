@@ -13,7 +13,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     let d = new Date();
-    console.log(d);
     this.year = d.getFullYear();
   }
 
