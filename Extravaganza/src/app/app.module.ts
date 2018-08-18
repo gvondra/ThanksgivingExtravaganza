@@ -9,6 +9,7 @@ import { MenuComponent } from './menu/menu.component';
 import { SponsorComponent } from './sponsor/sponsor.component';
 import { DisclaimerComponent } from './disclaimer/disclaimer.component';
 import { FoodComponent } from './food/food.component';
+import { PhotosComponent } from './photos/photos.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FoodComponent } from './food/food.component';
     MenuComponent,
     SponsorComponent,
     DisclaimerComponent,
-    FoodComponent
+    FoodComponent,
+    PhotosComponent
   ],
   imports: [
     BrowserModule,

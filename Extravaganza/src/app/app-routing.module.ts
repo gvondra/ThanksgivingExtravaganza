@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { SponsorComponent } from './sponsor/sponsor.component';
 import { DisclaimerComponent } from './disclaimer/disclaimer.component';
 import { FoodComponent} from './food/food.component';
+import { PhotosComponent } from './photos/photos.component';
 const routes: Routes = [
   {
     path: "",
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: "menu",
     component: FoodComponent
+  },
+  {
+    path: "photos",
+    component: PhotosComponent
   }
 ];
 
