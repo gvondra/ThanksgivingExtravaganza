@@ -5,8 +5,14 @@ admin:
   hostname: localhost
 apiEndpoints:
   # see: http://www.express-gateway.io/docs/configuration/gateway.config.yml/apiEndpoints
+  webClient:
+    host: '*'
+    paths:
+      - '**'      
 serviceEndpoints:
   # see: http://www.express-gateway.io/docs/configuration/gateway.config.yml/serviceEndpoints
+  webClient:
+    url: http://localhost:4200
 policies:
   - basic-auth
   - cors
@@ -18,3 +24,10 @@ policies:
   - rate-limit
 pipelines:
   # see: https://www.express-gateway.io/docs/configuration/gateway.config.yml/pipelines
+  webClient:
+    apiEndpoints:
+      - webClient
+    policies:
+      - proxy:
+          - action: 
+              serviceEndpoint: webClient
