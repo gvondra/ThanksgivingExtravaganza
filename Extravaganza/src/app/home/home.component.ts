@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  year: number = null;
+
   constructor() { }
 
   ngOnInit() {
+    let d = new Date();
+    console.log(d);
+    this.year = d.getFullYear();
   }
 
 }
