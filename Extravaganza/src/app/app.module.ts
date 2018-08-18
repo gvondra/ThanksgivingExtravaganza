@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { SponsorComponent } from './sponsor/sponsor.component';
 import { DisclaimerComponent } from './disclaimer/disclaimer.component';
+import { FoodComponent } from './food/food.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { DisclaimerComponent } from './disclaimer/disclaimer.component';
     HomeComponent,
     MenuComponent,
     SponsorComponent,
-    DisclaimerComponent
+    DisclaimerComponent,
+    FoodComponent
   ],
   imports: [
     BrowserModule,
