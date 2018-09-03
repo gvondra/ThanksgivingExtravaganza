@@ -5,14 +5,20 @@ admin:
   hostname: localhost
 apiEndpoints:
   # see: http://www.express-gateway.io/docs/configuration/gateway.config.yml/apiEndpoints
+  webRoot:
+    host: '*'
+    paths:
+      - '/'
+    methos: ['GET']   
   webClient:
     host: '*'
     paths:
-      - '**'      
+      - '**'   
+    methos: ['GET']   
 serviceEndpoints:
   # see: http://www.express-gateway.io/docs/configuration/gateway.config.yml/serviceEndpoints
   webClient:
-    url: http://localhost:4200
+    url: "${ENV_STATIC_CONTENT_ROOT:-http://localhost:4200/}"
 policies:
   - basic-auth
   - cors
@@ -22,8 +28,21 @@ policies:
   - oauth2
   - proxy
   - rate-limit
+  - rewrite
 pipelines:
   # see: https://www.express-gateway.io/docs/configuration/gateway.config.yml/pipelines
+  webRoot:
+    apiEndpoints:
+      - webRoot
+    policies:
+      - rewrite:
+          - 
+            condition:
+              name: pathmatch
+              match: /
+            action:
+              rewrite: /index.html
+              redirect: 302
   webClient:
     apiEndpoints:
       - webClient
