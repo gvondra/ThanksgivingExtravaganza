@@ -9,11 +9,13 @@ ENV PATH=$PATH:/home/node/.npm-global/bin
 WORKDIR /home/node/app
 
 # Copy the current directory contents into the container at /app
-ADD ./package.json /home/node/app
-ADD ./server.js /home/node/app
-ADD ./config /home/node/app/config
+COPY ./package.json /home/node/app
+COPY ./server.js /home/node/app
+COPY ./config /home/node/app/config
 
 RUN ["npm", "install"]
+
+RUN ["chown", "-R", "node", "/home/node/app/"]
 
 ENV ENV_STATIC_CONTENT_ROOT="https://thanksgivingextravaganza.blob.core.windows.net/staticcontent/"
 
