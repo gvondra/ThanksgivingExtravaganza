@@ -1,8 +1,5 @@
 http:
-  port: 8080
-admin:
-  port: 9876
-  hostname: localhost
+  port: 80
 apiEndpoints:
   # see: http://www.express-gateway.io/docs/configuration/gateway.config.yml/apiEndpoints
   webRoot:
