@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Vondra.Thanksgiving.Extravaganza.DataTier.Client</AssemblyName>
+    <RootNamespace>Vondra.Thanksgiving.Extravaganza.DataTier.Client</RootNamespace>
+    <Authors>Greg Vondra</Authors>
+    <Company>Beer Can Beer</Company>
+    <Product>Vondra Thanksgiving Extravaganza</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="Vondra.DataTier.Common" Version="1.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataTier.Models\DataTier.Models.csproj" />
+  </ItemGroup>
+
+</Project>

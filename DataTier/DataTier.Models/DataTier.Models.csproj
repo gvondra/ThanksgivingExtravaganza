@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Vondra.Thanksgiving.Extravaganza.DataTier.Models</AssemblyName>
+    <RootNamespace>Vondra.Thanksgiving.Extravaganza.DataTier.Models</RootNamespace>
+    <Authors>Greg Vondra</Authors>
+    <Company>Beer Can Beer</Company>
+    <Product>Vondra Thanksgiving Extravaganza</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Vondra.DataTier.Common" Version="1.0.2" />
+  </ItemGroup>
+
+</Project>
