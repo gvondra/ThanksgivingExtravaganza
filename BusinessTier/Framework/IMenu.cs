@@ -16,5 +16,6 @@ namespace Vondra.Thanksgiving.Extravaganza.Framework
         IEnumerable<IMenuComment> GetMenuComments(ISettings settings);
         void Create(ITransactionHandler transactionHandler);
         void Update(ITransactionHandler transactionHandler);
+        void Delete(ITransactionHandler transactionHandler);
     }
 }

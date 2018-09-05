@@ -4,9 +4,9 @@ using System.Data;
 
 namespace Vondra.Thanksgiving.Extravaganza.Framework
 {
-    public interface ITransactionHandler
+    public interface ITransactionHandler : ISettings
     {
         IDbConnection DatabaseConnection { get; set; }
-        IDbTransaction DatabaseTransaction { get; set; }
+        Vondra.DataTier.Common.IDbTransaction DatabaseTransaction { get; set; }
     }
 }

@@ -2,16 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Vondra.Thanksgiving.Extravaganza.Framework</AssemblyName>
-    <RootNamespace>Vondra.Thanksgiving.Extravaganza.Framework</RootNamespace>
+    <AssemblyName>Vondra.Thanksgiving.Extravaganza.BusinessTier.Common</AssemblyName>
+    <RootNamespace>Vondra.Thanksgiving.Extravaganza.BusinessTier.Common</RootNamespace>
     <Authors>Greg Vondra</Authors>
     <Company>Beer Can Beer</Company>
     <Product>Vondra Thanksgiving Extravaganza</Product>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="Vondra.DataTier.Common" Version="1.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\Framework.csproj" />
   </ItemGroup>
 
 </Project>

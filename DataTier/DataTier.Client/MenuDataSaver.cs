@@ -15,31 +15,34 @@ namespace Vondra.Thanksgiving.Extravaganza.DataTier.Client
 
         public void Create(ITransactionHandler transactionHandler, IDbProviderFactory providerFactory, MenuData menuData)
         {
-            providerFactory.EstablishTransaction(transactionHandler, menuData);
-            using (IDbCommand command = transactionHandler.Connection.CreateCommand())
+            if (menuData.DataStateManager.GetState(menuData) == DataStateManagerState.New)
             {
-                command.CommandText = "vte.ISP_Menu";
-                command.CommandType = CommandType.StoredProcedure;
-                command.Transaction = transactionHandler.Transaction.InnerTransaction;
+                providerFactory.EstablishTransaction(transactionHandler, menuData);
+                using (IDbCommand command = transactionHandler.Connection.CreateCommand())
+                {
+                    command.CommandText = "vte.ISP_Menu";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Transaction = transactionHandler.Transaction.InnerTransaction;
 
-                IDataParameter id = Util.CreateParameter(providerFactory, "id", DbType.Int32);
-                id.Direction = ParameterDirection.Output;
-                command.Parameters.Add(id);
+                    IDataParameter id = Util.CreateParameter(providerFactory, "id", DbType.Int32);
+                    id.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(id);
 
-                IDataParameter timestamp = Util.CreateParameter(providerFactory, "timestamp", DbType.DateTime);
-                timestamp.Direction = ParameterDirection.Output;
-                command.Parameters.Add(timestamp);
+                    IDataParameter timestamp = Util.CreateParameter(providerFactory, "timestamp", DbType.DateTime);
+                    timestamp.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(timestamp);
 
-                Util.AddParameter(providerFactory, command.Parameters, "title", DbType.String, Util.GetParameterValue(menuData.Title));
-                Util.AddParameter(providerFactory, command.Parameters, "description", DbType.String, Util.GetParameterValue(menuData.Description));
-                Util.AddParameter(providerFactory, command.Parameters, "sortOrder", DbType.Int32, Util.GetParameterValue(menuData.SortOrder));
+                    Util.AddParameter(providerFactory, command.Parameters, "title", DbType.String, Util.GetParameterValue(menuData.Title));
+                    Util.AddParameter(providerFactory, command.Parameters, "description", DbType.String, Util.GetParameterValue(menuData.Description));
+                    Util.AddParameter(providerFactory, command.Parameters, "sortOrder", DbType.Int32, Util.GetParameterValue(menuData.SortOrder));
 
-                command.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
 
-                menuData.MenuId = (int)id.Value;
-                menuData.CreateTimestamp = (DateTime)timestamp.Value;
-                menuData.UpdateTimestamp = (DateTime)timestamp.Value;
-            }
+                    menuData.MenuId = (int)id.Value;
+                    menuData.CreateTimestamp = (DateTime)timestamp.Value;
+                    menuData.UpdateTimestamp = (DateTime)timestamp.Value;
+                }
+            }            
         }
 
         public void Delete(ITransactionHandler transactionHandler, int id)
@@ -69,26 +72,29 @@ namespace Vondra.Thanksgiving.Extravaganza.DataTier.Client
 
         public void Update(ITransactionHandler transactionHandler, IDbProviderFactory providerFactory, MenuData menuData)
         {
-            providerFactory.EstablishTransaction(transactionHandler, menuData);
-            using (IDbCommand command = transactionHandler.Connection.CreateCommand())
+            if (menuData.DataStateManager.GetState(menuData) == DataStateManagerState.Updated)
             {
-                command.CommandText = "vte.USP_Menu";
-                command.CommandType = CommandType.StoredProcedure;
-                command.Transaction = transactionHandler.Transaction.InnerTransaction;
+                providerFactory.EstablishTransaction(transactionHandler, menuData);
+                using (IDbCommand command = transactionHandler.Connection.CreateCommand())
+                {
+                    command.CommandText = "vte.USP_Menu";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Transaction = transactionHandler.Transaction.InnerTransaction;
 
-                IDataParameter timestamp = Util.CreateParameter(providerFactory, "timestamp", DbType.DateTime);
-                timestamp.Direction = ParameterDirection.Output;
-                command.Parameters.Add(timestamp);
+                    IDataParameter timestamp = Util.CreateParameter(providerFactory, "timestamp", DbType.DateTime);
+                    timestamp.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(timestamp);
 
-                Util.AddParameter(providerFactory, command.Parameters, "id", DbType.Int32, Util.GetParameterValue(menuData.MenuId));
-                Util.AddParameter(providerFactory, command.Parameters, "title", DbType.String, Util.GetParameterValue(menuData.Title));
-                Util.AddParameter(providerFactory, command.Parameters, "description", DbType.String, Util.GetParameterValue(menuData.Description));
-                Util.AddParameter(providerFactory, command.Parameters, "sortOrder", DbType.Int32, Util.GetParameterValue(menuData.SortOrder));
+                    Util.AddParameter(providerFactory, command.Parameters, "id", DbType.Int32, Util.GetParameterValue(menuData.MenuId));
+                    Util.AddParameter(providerFactory, command.Parameters, "title", DbType.String, Util.GetParameterValue(menuData.Title));
+                    Util.AddParameter(providerFactory, command.Parameters, "description", DbType.String, Util.GetParameterValue(menuData.Description));
+                    Util.AddParameter(providerFactory, command.Parameters, "sortOrder", DbType.Int32, Util.GetParameterValue(menuData.SortOrder));
 
-                command.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
 
-                menuData.UpdateTimestamp = (DateTime)timestamp.Value;
-            }
+                    menuData.UpdateTimestamp = (DateTime)timestamp.Value;
+                }
+            }            
         }
     }
 }
