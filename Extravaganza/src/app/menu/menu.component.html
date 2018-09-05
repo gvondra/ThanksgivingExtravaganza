@@ -17,7 +17,7 @@
         <a routerLink="/disclaimer">Disclaimer</a>
       </li>
       <li>
-        <a routerLink="/Login">Login</a>
+        <a *ngIf="!auth.isAuthenticated()" (click)="auth.login()">Login</a>
       </li>
     </ul>
   </nav>

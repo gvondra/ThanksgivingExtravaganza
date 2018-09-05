@@ -4,5 +4,8 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  clientId: "q3Afa42bxxeZAq1w1UtFu9sxslBKIURR",
+  authDomain: "vondra.auth0.com",
+  callbackUrl: "http://localhost/callback"
 };

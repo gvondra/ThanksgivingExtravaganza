@@ -1,14 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuardService as AuthGuard } from './auth-guard.service';
 import { HomeComponent } from './home/home.component';
 import { SponsorComponent } from './sponsor/sponsor.component';
 import { DisclaimerComponent } from './disclaimer/disclaimer.component';
 import { FoodComponent} from './food/food.component';
 import { PhotosComponent } from './photos/photos.component';
+import { CallbackComponent } from './callback/callback.component';
 const routes: Routes = [
   {
     path: "",
     component: HomeComponent
+  },
+  {
+    path: "callback",
+    component: CallbackComponent
   },
   {
     path: "sponsor",
@@ -20,7 +26,8 @@ const routes: Routes = [
   },
   {
     path: "menu",
-    component: FoodComponent
+    component: FoodComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: "photos",
@@ -30,6 +37,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }
