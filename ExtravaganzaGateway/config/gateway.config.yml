@@ -6,16 +6,28 @@ apiEndpoints:
     host: '*'
     paths:
       - '/'
-    methos: ['GET']   
-  webClient:
+    methos: ['GET']     
+  sockjsnode:
+    host: '*'
+    paths:
+      - '/sockjs-node/**'
+    methos: ['GET', 'POST']     
+  staticContent:
+    host: '*'
+    paths:
+      - '**/*.*'   
+    methos: ['GET']  
+  default:
     host: '*'
     paths:
       - '**'   
     methos: ['GET']   
 serviceEndpoints:
   # see: http://www.express-gateway.io/docs/configuration/gateway.config.yml/serviceEndpoints
-  webClient:
-    url: "${ENV_STATIC_CONTENT_ROOT:-http://localhost:4200/}"
+  staticContent:
+    url: "${ENV_STATIC_CONTENT_ROOT:-http://localhost:4200}"
+  default:
+    url: "${ENV_STATIC_CONTENT_ROOT:-http://localhost:4200}/index.html"
 policies:
   - basic-auth
   - cors
@@ -39,11 +51,22 @@ pipelines:
               match: /
             action:
               rewrite: /index.html
-              redirect: 302
-  webClient:
+      - proxy:
+          - action: 
+              serviceEndpoint: staticContent
+  staticContent:
     apiEndpoints:
-      - webClient
+      - staticContent
+      - sockjsnode
     policies:
       - proxy:
           - action: 
-              serviceEndpoint: webClient
+              serviceEndpoint: staticContent
+  default:
+    apiEndpoints:
+      - default
+    policies:
+      - proxy:
+          - action: 
+              ignorePath: true
+              serviceEndpoint: default
