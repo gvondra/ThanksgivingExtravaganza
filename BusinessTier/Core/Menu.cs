@@ -39,7 +39,8 @@ namespace Vondra.Thanksgiving.Extravaganza.Core
             }
             set
             {
-                m_menuData.Title = value;
+                value = value ?? string.Empty;
+                m_menuData.Title = value.Trim();
             }
         }
         public string Description

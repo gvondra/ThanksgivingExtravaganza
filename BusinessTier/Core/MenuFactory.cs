@@ -20,13 +20,21 @@ namespace Vondra.Thanksgiving.Extravaganza.Core
             m_menuCommentFactory = menuCommentFactory;
         }
 
+        public IMenu Create()
+        {
+            using (ILifetimeScope scope = m_dependencyContainer.GetContainer().BeginLifetimeScope())
+            {
+                return new Menu(new MenuData(), scope.Resolve<IMenuDataSaver>(), m_menuCommentFactory);
+            }            
+        }
+
         public IMenu Get(ISettings settings, int id)
         {
             using (ILifetimeScope scope = m_dependencyContainer.GetContainer().BeginLifetimeScope())
             {
                 IMenuDataFactory dataFactory = scope.Resolve<IMenuDataFactory>();
                 MenuData data = dataFactory.Get(new Settings(settings), id);
-                if (data == null)
+                if (data != null)
                 {
                     return new Menu(data, scope.Resolve<IMenuDataSaver>(), m_menuCommentFactory);
                 }
