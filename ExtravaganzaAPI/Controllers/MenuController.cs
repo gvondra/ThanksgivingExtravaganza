@@ -38,7 +38,6 @@ namespace ExtravaganzaAPI.Controllers
         }
 
         [HttpGet()]  
-        [Authorize(Policy = "thanksgiving-read")]
         public IActionResult GetAll()
         {            
             IActionResult result = null;
