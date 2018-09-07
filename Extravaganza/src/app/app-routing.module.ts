@@ -7,6 +7,7 @@ import { DisclaimerComponent } from './disclaimer/disclaimer.component';
 import { FoodComponent} from './food/food.component';
 import { PhotosComponent } from './photos/photos.component';
 import { CallbackComponent } from './callback/callback.component';
+import { FoodMenuItemComponent } from './food-menu-item/food-menu-item.component';
 const routes: Routes = [
   {
     path: "",
@@ -26,7 +27,16 @@ const routes: Routes = [
   },
   {
     path: "menu",
-    component: FoodComponent,
+    component: FoodComponent
+  },
+  {
+    path: "menuItem",
+    component: FoodMenuItemComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "menuItem/:id",
+    component: FoodMenuItemComponent,
     canActivate: [AuthGuard]
   },
   {

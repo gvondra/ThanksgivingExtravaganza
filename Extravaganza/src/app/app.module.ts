@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AuthService } from './auth.service';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,7 +13,7 @@ import { DisclaimerComponent } from './disclaimer/disclaimer.component';
 import { FoodComponent } from './food/food.component';
 import { PhotosComponent } from './photos/photos.component';
 import { CallbackComponent } from './callback/callback.component';
-
+import { FoodMenuItemComponent } from './food-menu-item/food-menu-item.component';
 
 @NgModule({
   declarations: [
@@ -23,10 +24,12 @@ import { CallbackComponent } from './callback/callback.component';
     DisclaimerComponent,
     FoodComponent,
     PhotosComponent,
-    CallbackComponent
+    CallbackComponent,
+    FoodMenuItemComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpModule
   ],

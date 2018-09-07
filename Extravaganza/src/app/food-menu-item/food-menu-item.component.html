@@ -1,0 +1,32 @@
+<h1>Menu Item</h1>
+<div *ngIf="errorMessage">
+    {{ errorMessage }}
+</div>
+<h2 *ngIf="item">{{ item.Title }}</h2>
+<form *ngIf="item" novalidate="novalidate" name="itemForm" #itemForm="ngForm">  
+  <div class="input-group mb-3" style="width: 45rem">
+    <div class="input-group-prepend">
+        <span class="input-group-text">Title</span>
+    </div>
+    <input id="title" name="title" 
+        #title="ngModel" 
+        [(ngModel)]="item.Title"
+        type="text" 
+        class="form-control"
+        maxLength="200"
+        required/>    
+  </div>
+  <div [hidden]="title.valid || title.pristine" class="alert alert-danger" style="max-width: 45rem; display: inline-block;">Title is required</div>
+  <div class="input-group mb-3" style="width: 45rem">
+    <div class="input-group-prepend">
+        <span class="input-group-text">Description</span>
+    </div>
+    <textarea id="description" name="description"
+        #description="ngModel"
+        [(ngModel)]="item.Description"
+        class="form-control"
+        rows="5"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!itemForm.form.valid" (click)="submit()">Save</button>
+  <button *ngIf="canDelete" type="button" class="btn btn-secondary" (click)="delete()">Delete</button>
+</form>
