@@ -4,6 +4,7 @@ EXPOSE 80
 
 FROM microsoft/aspnetcore-build:2.0 AS build
 WORKDIR /src
+COPY *.sln .
 COPY ExtravaganzaAPI/ExtravaganzaAPI.csproj ExtravaganzaAPI/
 COPY BusinessTier/Core/Core.csproj BusinessTier/Core/
 COPY BusinessTier/Framework/Framework.csproj BusinessTier/Framework/
