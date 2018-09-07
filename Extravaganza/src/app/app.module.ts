@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AuthService } from './auth.service';
 import { AppRoutingModule } from './app-routing.module';
+import { MarkdownToHtmlModule } from 'ng2-markdown-to-html';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -31,7 +32,8 @@ import { FoodMenuItemComponent } from './food-menu-item/food-menu-item.component
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    MarkdownToHtmlModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

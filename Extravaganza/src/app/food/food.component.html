@@ -8,10 +8,12 @@
     <div *ngFor="let i of menuItems">
         <h3>{{ i.Title }}</h3>
         <a *ngIf="canWrite" [routerLink]="['/menuItem', i.MenuId]">edit</a>
-        <p>{{ i.Description }}</p>
+        <div>
+            <markdown-to-html markdown-to-html [data]="i.Description"></markdown-to-html>
+        </div>
     </div>
 </div>
-<div style="background-color: darkslategray">
+<!--<div style="background-color: darkslategray">
     <h3>Turkey</h3>
     <p><a href="http://www.butterball.com/how-tos/choose-a-turkey">Butterball</a> says we need a 11 lb. turkey for 5 Adults and 2 Kids.  
     We’ll try this turkey recipe from <a href="http://www.myrecipes.com/recipe/ojai-roast-turkey-with-rosemary-lemon-garlic">myreciepes</a> again.</p>
@@ -34,5 +36,5 @@
     <p>Mom?</p>
     <h3>Drink</h3> 
     <p>Lemonade, milk, champagne?, beer (keg?)</p>
-</div>
+</div>-->
 </div>
