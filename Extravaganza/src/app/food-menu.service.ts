@@ -9,7 +9,7 @@ export class FoodMenuService {
 
   getAll(): Promise<Array<FoodMenu>> {
     return this.http.get("api/menu", {
-      headers: new Headers({"Authorization": `Bearer ${localStorage.getItem('token')}`})
+      headers: new Headers({"Authorization": `Bearer ${localStorage.getItem('access_token')}`})
     })
     .toPromise()
     .then(response => response.json() as Array<FoodMenu>)
@@ -17,7 +17,7 @@ export class FoodMenuService {
 
   get(id: number): Promise<FoodMenu> {
     return this.http.get("api/menu/" + id, {
-      headers: new Headers({"Authorization": `Bearer ${localStorage.getItem('token')}`})
+      headers: new Headers({"Authorization": `Bearer ${localStorage.getItem('access_token')}`})
     })
     .toPromise()
     .then(response => response.json() as FoodMenu)
