@@ -23,14 +23,12 @@ export class FoodComponent implements OnInit {
         if (this.profile && this.profile['http://vondra/thanksgiving-write'] == 1 && this.profile['http://vondra/thanksgiving-read'] == 1){
           this.canWrite = true;
         }
-        console.log(this.profile);
       } else {
         this.auth.getProfile((err, profile) => {
           this.profile = profile;
           if (this.profile && this.profile['http://vondra/thanksgiving-write'] == 1 && this.profile['http://vondra/thanksgiving-read'] == 1){
             this.canWrite = true;
           }
-          console.log(this.profile);
         });
       }      
     }
