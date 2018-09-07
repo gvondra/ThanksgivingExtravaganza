@@ -12,7 +12,7 @@ export class FoodMenuService {
       headers: new Headers({"Authorization": `Bearer ${localStorage.getItem('access_token')}`})
     })
     .toPromise()
-    .then(response => response.json() as Array<FoodMenu>)
+    .then(response => response.json() as Array<FoodMenu>);
   }
 
   get(id: number): Promise<FoodMenu> {
@@ -20,6 +20,29 @@ export class FoodMenuService {
       headers: new Headers({"Authorization": `Bearer ${localStorage.getItem('access_token')}`})
     })
     .toPromise()
-    .then(response => response.json() as FoodMenu)
+    .then(response => response.json() as FoodMenu);
+  }
+
+  delete(id: number): Promise<any> {
+    return this.http.delete("api/menu/" + id, {
+      headers: new Headers({"Authorization": `Bearer ${localStorage.getItem('access_token')}`})
+    })
+    .toPromise();
+  }
+
+  create(item: FoodMenu): Promise<FoodMenu> {
+    return this.http.post("api/menu", item, {
+      headers: new Headers({"Authorization": `Bearer ${localStorage.getItem('access_token')}`})
+    })
+    .toPromise()
+    .then(response => response.json() as FoodMenu);
+  }
+
+  update(item: FoodMenu): Promise<FoodMenu> {
+    return this.http.put("api/menu", item, {
+      headers: new Headers({"Authorization": `Bearer ${localStorage.getItem('access_token')}`})
+    })
+    .toPromise()
+    .then(response => response.json() as FoodMenu);
   }
 }
