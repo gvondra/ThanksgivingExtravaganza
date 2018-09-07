@@ -2,6 +2,10 @@ http:
   port: 80
 apiEndpoints:
   # see: http://www.express-gateway.io/docs/configuration/gateway.config.yml/apiEndpoints
+  vteAPI:
+    host: '*'
+    paths:
+      - '/api/**'
   webRoot:
     host: '*'
     paths:
@@ -24,6 +28,8 @@ apiEndpoints:
     methos: ['GET']   
 serviceEndpoints:
   # see: http://www.express-gateway.io/docs/configuration/gateway.config.yml/serviceEndpoints
+  vteAPI:
+    url: "${ENV_VTE_API:-http://localhost:64644}"
   staticContent:
     url: "${ENV_STATIC_CONTENT_ROOT:-http://localhost:4200}"
   default:
@@ -40,6 +46,13 @@ policies:
   - rewrite
 pipelines:
   # see: https://www.express-gateway.io/docs/configuration/gateway.config.yml/pipelines
+  vteAPI:
+    apiEndpoints:
+      - vteAPI
+    policies:
+      - proxy:
+          - action: 
+              serviceEndpoint: vteAPI
   webRoot:
     apiEndpoints:
       - webRoot
