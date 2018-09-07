@@ -9,12 +9,17 @@ html, body {
     color: lightyellow;
 }
 
+a {
+    color: lightyellow;
+    text-decoration: underline;
+  }
+
 nav ul {
     list-style: inside none; 
     padding-left: 0px;
 }
 
-nav ul li a:visited, nav ul li a:link {
+nav ul li a, nav ul li a:visited, nav ul li a:link {
     text-decoration: none;
     color: lightyellow;
 }
