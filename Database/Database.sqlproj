@@ -74,5 +74,14 @@
     <Build Include="Stored Procedures\vte.ISP_MenuComment.sql" />
     <Build Include="Stored Procedures\vte.ISP_Menu.sql" />
     <Build Include="Stored Procedures\vte.USP_Menu.sql" />
+    <Build Include="Tables\vte.Invitation.sql" />
+    <Build Include="Tables\vte.InvitationResponse.sql" />
+    <Build Include="Stored Procedures\vte.ISP_Invitation.sql" />
+    <Build Include="Stored Procedures\vte.USP_Invitation.sql" />
+    <Build Include="Stored Procedures\vte.SSP_Invitation_All.sql" />
+    <Build Include="Stored Procedures\vte.SSP_Invitation.sql" />
+    <Build Include="Stored Procedures\vte.DSP_Invitation.sql" />
+    <Build Include="Stored Procedures\vte.ISP_InvitationResponse.sql" />
+    <Build Include="Stored Procedures\vte.SSP_InvitationResponse_by_InvitationId.sql" />
   </ItemGroup>
 </Project>
