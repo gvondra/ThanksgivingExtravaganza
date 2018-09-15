@@ -7,11 +7,11 @@ namespace Vondra.Thanksgiving.Extravaganza.DataTier.Client
 {
     public class InvitationResponseDataSaver : IInvitationResponseDataSaver
     {
-        public void Create(ITransactionHandler transactionHandler, InviationResponseData responseData)
+        public void Create(ITransactionHandler transactionHandler, InvitationResponseData responseData)
         {
             Create(transactionHandler, new DbProviderFactory(), responseData);
         }
-        public void Create(ITransactionHandler transactionHandler, IDbProviderFactory providerFactory, InviationResponseData responseData)
+        public void Create(ITransactionHandler transactionHandler, IDbProviderFactory providerFactory, InvitationResponseData responseData)
         {
             if (responseData.DataStateManager.GetState(responseData) == DataStateManagerState.New)
             {

@@ -4,7 +4,7 @@ using System.Text;
 using Vondra.DataTier.Common;
 namespace Vondra.Thanksgiving.Extravaganza.DataTier.Models
 {
-    public class InviationResponseData : DataManagedStateBase<InviationResponseData>
+    public class InvitationResponseData : DataManagedStateBase<InvitationResponseData>
     {
         [ColumnMapping("InvitationResponseId", IsNullable = false)] public int InvitationResponseId { get; set; }
         [ColumnMapping("InvitationId", IsNullable = false)] public Guid InvitationId { get; set; }

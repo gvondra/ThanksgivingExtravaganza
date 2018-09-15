@@ -7,6 +7,6 @@ namespace Vondra.Thanksgiving.Extravaganza.DataTier.Client
 {
     public interface IInvitationResponseDataFactory
     {
-        IEnumerable<InviationResponseData> GetByInvitationId(ISettings settings, Guid invitationId);
+        IEnumerable<InvitationResponseData> GetByInvitationId(ISettings settings, Guid invitationId);
     }
 }

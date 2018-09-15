@@ -7,24 +7,24 @@ namespace Vondra.Thanksgiving.Extravaganza.DataTier.Client
 {
     public class InvitationResponseDataFactory : IInvitationResponseDataFactory
     {
-        private IGenericDataFactory<InviationResponseData> m_genericDataFactory;
+        private IGenericDataFactory<InvitationResponseData> m_genericDataFactory;
 
         public InvitationResponseDataFactory()
         {
-            m_genericDataFactory = new GenericDataFactory<InviationResponseData>();
+            m_genericDataFactory = new GenericDataFactory<InvitationResponseData>();
         }
 
-        public IEnumerable<InviationResponseData> GetByInvitationId(ISettings settings, Guid invitationId)
+        public IEnumerable<InvitationResponseData> GetByInvitationId(ISettings settings, Guid invitationId)
         {
             return GetByInvitationId(settings, new DbProviderFactory(), invitationId);
         }
 
-        public IEnumerable<InviationResponseData> GetByInvitationId(ISettings settings, IDbProviderFactory providerFactory, Guid invitationId)
+        public IEnumerable<InvitationResponseData> GetByInvitationId(ISettings settings, IDbProviderFactory providerFactory, Guid invitationId)
         {
             IDataParameter parameter = Util.CreateParameter(providerFactory, "invitationId", DbType.Guid);
             parameter.Value = invitationId;
             return m_genericDataFactory.GetData(settings, providerFactory, "vte.SSP_InvitationResponse_by_InvitationId",
-                () => new InviationResponseData(),
+                () => new InvitationResponseData(),
                 Util.AssignDataStateManager,
                 new IDataParameter[] { parameter }
                 );

@@ -19,6 +19,10 @@ namespace Vondra.Thanksgiving.Extravaganza.Core
 
         public static void Build(ContainerBuilder builder)
         {
+            builder.RegisterType<InvitationFactory>().As<IInvitationFactory>();
+            builder.RegisterType<InvitationSaver>().As<IInvitationSaver>();
+            builder.RegisterType<InvitationResponseFactory>().As<IInvitationResponseFactory>();
+            builder.RegisterType<InvitationResponseSaver>().As<IInvitationResponseSaver>();
             builder.RegisterType<MenuCommentFactory>().As<IMenuCommentFactory>();
             builder.RegisterType<MenuCommentSaver>().As<IMenuCommentSaver>();
             builder.RegisterType<MenuFactory>().As<IMenuFactory>();

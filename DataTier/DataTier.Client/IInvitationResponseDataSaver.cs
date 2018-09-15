@@ -7,6 +7,6 @@ namespace Vondra.Thanksgiving.Extravaganza.DataTier.Client
 {
     public interface IInvitationResponseDataSaver
     {
-        void Create(ITransactionHandler transactionHandler, InviationResponseData responseData);
+        void Create(ITransactionHandler transactionHandler, InvitationResponseData responseData);
     }
 }
