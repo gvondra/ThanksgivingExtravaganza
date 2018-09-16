@@ -136,5 +136,92 @@ namespace ExtravaganzaAPI.Controllers
 
             return result;
         }
+
+        [HttpPut()]
+        [Authorize(Policy = "thanksgiving-write")]
+        public IActionResult Update([FromBody] Models.Invitation invitation)
+        {
+            IActionResult result = null;
+            IMapper mapper = null;
+            IInvitation innerInvitation = null;
+
+            if (result == null && invitation == null)
+            {
+                result = BadRequest("Missing invitation data");
+            }
+
+            if (result == null && (!invitation.InvitationId.HasValue || invitation.InvitationId.Equals(Guid.Empty)))
+            {
+                result = BadRequest("Missing id");
+            }
+
+            if (result == null && !invitation.EventDate.HasValue)
+            {
+                result = BadRequest("Missing event date");
+            }
+
+            if (result == null && !invitation.RSVPDueDate.HasValue)
+            {
+                result = BadRequest("Missing RSVP date");
+            }
+
+            if (result == null && string.IsNullOrEmpty(invitation.Title))
+            {
+                result = BadRequest("Missing title");
+            }
+
+            if (result == null && string.IsNullOrEmpty(invitation.Invitee))
+            {
+                result = BadRequest("Missing invitee");
+            }
+
+            if (result == null)
+            {
+                mapper = new Mapper(m_mapperConfiguration);
+                using (ILifetimeScope scope = m_container.BeginLifetimeScope())
+                {
+                    IInvitationFactory factory = scope.Resolve<IInvitationFactory>();
+                    innerInvitation = factory.Get(m_settings.Value, invitation.InvitationId.Value);
+
+                    if (innerInvitation == null)
+                    {
+                        result = NotFound();
+                    }
+                    else
+                    {
+                        mapper.Map<Models.Invitation, IInvitation>(invitation, innerInvitation);
+                        IInvitationSaver saver = scope.Resolve<IInvitationSaver>();
+                        saver.Update(m_settings.Value, innerInvitation);
+                        invitation = mapper.Map<Models.Invitation>(innerInvitation);
+                        result = Ok(invitation);
+                    }                   
+                }
+            }
+            return result;
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize(Policy = "thanksgiving-write")]
+        public IActionResult Delete(Guid id)
+        {
+            IActionResult result = null;
+
+            if (result == null && id.Equals(Guid.Empty))
+            {
+                result = BadRequest("Missing id");
+            }
+
+            if (result == null)
+            {
+                using (ILifetimeScope scope = m_container.BeginLifetimeScope())
+                {
+                    IInvitationSaver saver = scope.Resolve<IInvitationSaver>();
+                    saver.Delete(m_settings.Value, id);
+                    result = Ok();
+                }
+            }
+            return result;
+        }
+
     }
 }
