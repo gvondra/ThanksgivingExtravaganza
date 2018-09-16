@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
-    <PackageReference Include="Vondra.DataTier.Common" Version="1.0.3" />
+    <PackageReference Include="Vondra.DataTier.Common" Version="1.0.4" />
   </ItemGroup>
 
 </Project>

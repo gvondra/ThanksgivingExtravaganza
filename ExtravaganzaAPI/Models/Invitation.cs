@@ -15,5 +15,6 @@ namespace ExtravaganzaAPI.Models
         public DateTime? RSVPDueDate { get; set; }
         public DateTime? CreateTimestamp { get; set; }
         public DateTime? UpdateTimestamp { get; set; }
+        public InvitationResponse[] Responses { get; set; }
     }
 }

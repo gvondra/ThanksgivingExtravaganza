@@ -26,6 +26,8 @@ namespace ExtravaganzaAPI.Controllers
             {
                 exp.CreateMap<IInvitation, Models.Invitation>();
                 exp.CreateMap<Models.Invitation, IInvitation>();
+                exp.CreateMap<IInvitationResponse, Models.InvitationResponse>();
+                exp.CreateMap<Models.InvitationResponse, IInvitationResponse>();
             });
         }
 
@@ -223,5 +225,75 @@ namespace ExtravaganzaAPI.Controllers
             return result;
         }
 
+        [HttpPost("{id}/Response")]
+        public IActionResult CreateResponse(Guid id, [FromBody] Models.InvitationResponse response)
+        {
+            IActionResult result = null;
+
+            if (result == null && id.Equals(Guid.Empty))
+            {
+                result = BadRequest("Missing id");
+            }
+
+            if (result == null && response == null)
+            {
+                result = BadRequest("Missing response data");
+            }
+
+            if (result == null)
+            {
+                using (ILifetimeScope scope = m_container.BeginLifetimeScope())
+                {
+                    IInvitationFactory factory = scope.Resolve<IInvitationFactory>();
+                    IInvitation invitation = factory.Get(m_settings.Value, id);
+                    if (invitation == null)
+                    {
+                        result = NotFound();
+                    }
+                    else
+                    {
+                        IInvitationResponse innerResponse = invitation.CreateResponse(response.IsAttending, response.AttendeeCount, response.Note);
+                        IInvitationResponseSaver saver = scope.Resolve<IInvitationResponseSaver>();
+                        saver.Create(m_settings.Value, innerResponse);
+                        IMapper mapper = new Mapper(m_mapperConfiguration);
+                        result = Ok(mapper.Map<Models.InvitationResponse>(innerResponse));
+                    }
+                }
+            }
+            return result;
+        }
+        [HttpGet("{id}/Response")]
+        [Authorize(Policy = "thanksgiving-write")]
+        public IActionResult GetResponses(Guid id)
+        {
+            IActionResult result = null;
+
+            if (result == null && id.Equals(Guid.Empty))
+            {
+                result = BadRequest("Missing invitation id");
+            }
+
+            if (result == null)
+            {
+                using (ILifetimeScope scope = m_container.BeginLifetimeScope())
+                {
+                    IInvitationFactory factory = scope.Resolve<IInvitationFactory>();
+                    IInvitation invitation = factory.Get(m_settings.Value, id);
+                    if (invitation == null)
+                    {
+                        result = NotFound();
+                    }
+                    else
+                    {
+                        IEnumerable<IInvitationResponse> responses = invitation.GetResponses(m_settings.Value);
+                        IMapper mapper = new Mapper(m_mapperConfiguration);
+                        result = Ok(
+                            responses.Select<IInvitationResponse, Models.InvitationResponse>(i => mapper.Map<Models.InvitationResponse>(i))
+                            );
+                    }
+                }
+            }
+            return result;
+        }
     }
 }
