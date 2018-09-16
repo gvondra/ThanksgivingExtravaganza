@@ -8,6 +8,10 @@ import { FoodComponent} from './food/food.component';
 import { PhotosComponent } from './photos/photos.component';
 import { CallbackComponent } from './callback/callback.component';
 import { FoodMenuItemComponent } from './food-menu-item/food-menu-item.component';
+import { InvitationsComponent } from './invitations/invitations.component';
+import { InvitationComponent } from './invitation/invitation.component';
+import { InvitationRsvpComponent } from './invitation-rsvp/invitation-rsvp.component';
+
 const routes: Routes = [
   {
     path: "",
@@ -42,6 +46,25 @@ const routes: Routes = [
   {
     path: "photos",
     component: PhotosComponent
+  },
+  {
+    path: "invitations",
+    component: InvitationsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "invitation",
+    component: InvitationComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "invitation/:id",
+    component: InvitationComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "invitationrsvp",
+    component: InvitationRsvpComponent
   }
 ];
 

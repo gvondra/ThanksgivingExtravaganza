@@ -15,6 +15,9 @@ import { FoodComponent } from './food/food.component';
 import { PhotosComponent } from './photos/photos.component';
 import { CallbackComponent } from './callback/callback.component';
 import { FoodMenuItemComponent } from './food-menu-item/food-menu-item.component';
+import { InvitationsComponent } from './invitations/invitations.component';
+import { InvitationComponent } from './invitation/invitation.component';
+import { InvitationRsvpComponent } from './invitation-rsvp/invitation-rsvp.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { FoodMenuItemComponent } from './food-menu-item/food-menu-item.component
     FoodComponent,
     PhotosComponent,
     CallbackComponent,
-    FoodMenuItemComponent
+    FoodMenuItemComponent,
+    InvitationsComponent,
+    InvitationComponent,
+    InvitationRsvpComponent
   ],
   imports: [
     BrowserModule,

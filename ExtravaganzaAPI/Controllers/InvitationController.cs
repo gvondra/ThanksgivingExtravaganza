@@ -263,7 +263,7 @@ namespace ExtravaganzaAPI.Controllers
             return result;
         }
         [HttpGet("{id}/Response")]
-        [Authorize(Policy = "thanksgiving-write")]
+        [Authorize(Policy = "thanksgiving-read")]
         public IActionResult GetResponses(Guid id)
         {
             IActionResult result = null;

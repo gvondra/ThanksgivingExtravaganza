@@ -1,0 +1,11 @@
+<div style="overflow: auto; max-height: 555px;">
+<h2>Invitations</h2> 
+<div *ngIf="showAdd">
+    <button class="btn btn-primary" type="button" routerLink="/invitation">Add</button>
+</div>
+<div *ngIf="invitations">
+  <ul *ngFor="let i of invitations">
+    <li><a [routerLink]="['/invitation', i.InvitationId]">{{ i.Invitee }}</a> is invited to {{ i.Title }} on {{ formatDate(i.EventDate) }}</li>
+  </ul>
+</div>
+</div>

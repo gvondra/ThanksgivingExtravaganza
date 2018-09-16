@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import * as auth0 from 'auth0-js';
 import { environment } from '../environments/environment';
+import { Observable } from 'rxjs/Observable';
 (window as any).global = window;
 
 @Injectable()
@@ -20,6 +21,12 @@ export class AuthService {
   userProfile: any;
 
   constructor(public router: Router) {}
+
+  public logChanged;
+
+  public logObservable = new Observable(subscriber => {
+    this.logChanged = () => { subscriber.next() };
+  });
   
   public getProfile(cb): void {
     const accessToken = localStorage.getItem('access_token');
@@ -45,12 +52,15 @@ export class AuthService {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.setSession(authResult);
-        this.router.navigate(['/home']);
+        if (this.logChanged){
+          this.logChanged();
+        }
+        this.router.navigate(['/']);
       } else if (err) {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
         console.log(err);
       }
-    });
+    });    
   }
 
   private setSession(authResult): void {
@@ -66,6 +76,7 @@ export class AuthService {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    this.logChanged();
     // Go back to the home route
     this.router.navigate(['/']);
   }
@@ -76,5 +87,4 @@ export class AuthService {
     const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
     return new Date().getTime() < expiresAt;
   }
-
 }
