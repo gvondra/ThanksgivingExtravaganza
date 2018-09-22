@@ -57,7 +57,7 @@ export class InvitationService {
   }
 
   getResponses(id: string) : Promise<Array<InvitationResponse>> {
-    return this.http.get("api/invitation" + id + "/response", {
+    return this.http.get("api/invitation/" + id + "/response", {
       headers: new Headers({"Authorization": `Bearer ${localStorage.getItem('access_token')}`})
     })
     .toPromise()

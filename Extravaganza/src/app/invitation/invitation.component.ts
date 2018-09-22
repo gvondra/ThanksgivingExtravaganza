@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Invitation } from '../invitation';
+import { InvitationResponse } from '../invitation-response';
 import { InvitationService } from '../invitation.service';
 @Component({
   selector: 'app-invitation',
@@ -15,6 +16,7 @@ export class InvitationComponent implements OnInit {
   rsvpDueDate2: string = null;
   canDelete: boolean = false;
   save: any = null;
+  responses: Array<InvitationResponse> = null;
 
   constructor(private route: ActivatedRoute, 
     private router: Router,
@@ -39,9 +41,12 @@ export class InvitationComponent implements OnInit {
           this.invitation = res;
           this.canDelete = true;
         });
+        this.invitationService.getResponses(params['id'])
+        .then(res => this.responses = res);
       }
       else {
         this.save = this.create;
+        this.responses = null;
         this.invitation = new Invitation();
       }
     });
@@ -81,5 +86,22 @@ export class InvitationComponent implements OnInit {
   delete() {
     this.invitationService.delete(this.invitation.InvitationId)
     .then(res => this.router.navigate(["/invitations"]));
+  }
+
+  formatTimestamp(value: string): string {
+    let result: string = value;
+    if (value && value != "") {
+      let dateValue: Date = new Date(value);
+      result = dateValue.toLocaleString();
+    }
+    return result;
+  }
+
+  formatBoolean(value: boolean): string {
+    let result: string = "No";
+    if (value) {
+      result = "Yes";
+    }
+    return result;
   }
 }

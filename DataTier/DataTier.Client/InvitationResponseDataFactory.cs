@@ -23,11 +23,16 @@ namespace Vondra.Thanksgiving.Extravaganza.DataTier.Client
         {
             IDataParameter parameter = Util.CreateParameter(providerFactory, "invitationId", DbType.Guid);
             parameter.Value = invitationId;
-            return m_genericDataFactory.GetData(settings, providerFactory, "vte.SSP_InvitationResponse_by_InvitationId",
+            IEnumerable<InvitationResponseData> responses = m_genericDataFactory.GetData(settings, providerFactory, "vte.SSP_InvitationResponse_by_InvitationId",
                 () => new InvitationResponseData(),
                 Util.AssignDataStateManager,
                 new IDataParameter[] { parameter }
                 );
+            foreach (InvitationResponseData r in responses)
+            {
+                r.CreateTimestamp = DateTime.SpecifyKind(r.CreateTimestamp, DateTimeKind.Utc);
+            }
+            return responses;
         }
     }
 }

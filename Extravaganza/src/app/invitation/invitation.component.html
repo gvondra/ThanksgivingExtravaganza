@@ -65,4 +65,21 @@
   <button *ngIf="canDelete" type="button" class="btn btn-secondary" (click)="delete()">Delete</button>
   <button *ngIf="canDelete" type="button" class="btn btn-secondary" [routerLink]="['/invitationrsvp', invitation.InvitationId]">View RSVP</button>
 </form>
+<div *ngIf="responses" style="margin-top: 1rem;">
+    <h3>Responses</h3>
+    <table class="table table-sm">
+        <tr>
+            <th>Will Attend</th>
+            <th>Attendee Count</th>
+            <th>Note</th>
+            <th>RSVP Timestamp</th>
+        </tr>
+        <tr *ngFor="let r of responses">
+            <td>{{ formatBoolean(r.IsAttending) }}</td>
+            <td>{{ r.AttendeeCount }}</td>
+            <td>{{ r.Note }}</td>
+            <td>{{ formatTimestamp(r.CreateTimestamp) }}</td>
+        </tr>
+    </table>
+</div>
 </div>
