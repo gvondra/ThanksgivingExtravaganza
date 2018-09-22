@@ -1,3 +1,67 @@
-<p>
-  invitation works!
-</p>
+<div style="overflow: auto; max-height: 555px;">
+<h2>Invitation</h2>
+<form *ngIf="invitation" novalidate="novalidate" name="invitationForm" #invitationForm="ngForm">
+  <div class="input-group mb-3" style="width: 45rem">
+    <div class="input-group-prepend">
+        <span class="input-group-text">Invitee</span>
+    </div>
+    <input id="invitee" name="invitee" 
+        #invitee="ngModel" 
+        [(ngModel)]="invitation.Invitee"
+        type="text" 
+        class="form-control"
+        maxLength="500"
+        required/>    
+  </div>  
+  <div [hidden]="invitee.valid || invitee.pristine" class="alert alert-danger" style="max-width: 45rem; display: inline-block;">Invitee is required</div>
+  <div class="input-group mb-3" style="width: 45rem">
+    <div class="input-group-prepend">
+        <span class="input-group-text">Title</span>
+    </div>
+    <input id="title" name="title" 
+        #title="ngModel" 
+        [(ngModel)]="invitation.Title"
+        type="text" 
+        class="form-control"
+        maxLength="500"
+        required/>  
+  </div>
+  <div [hidden]="title.valid || title.pristine" class="alert alert-danger" style="max-width: 45rem; display: inline-block;">Title is required</div>
+  <div class="input-group mb-3" style="width: 45rem">
+    <div class="input-group-prepend">
+        <span class="input-group-text">Note</span>
+    </div>
+    <textarea id="note" name="note"
+        #description="ngModel"
+        [(ngModel)]="invitation.Note"
+        class="form-control"
+        rows="2"></textarea>
+  </div>
+  <div class="input-group mb-3" style="width: 20rem">
+    <div class="input-group-prepend">
+        <span class="input-group-text">Date</span>
+    </div>
+    <input id="eventDate" name="eventDate" 
+        #eventDate="ngModel" 
+        [(ngModel)]="eventDate2"
+        type="date" 
+        class="form-control"
+        required/>  
+  </div>
+  <div [hidden]="eventDate.valid || eventDate.pristine" class="alert alert-danger" style="max-width: 45rem; display: inline-block;">Event date is required</div>
+  <div class="input-group mb-3" style="width: 20rem">
+    <div class="input-group-prepend">
+        <span class="input-group-text">RSVP Due</span>
+    </div>
+    <input id="rsvpDueDate" name="rsvpDueDate" 
+        #rsvpDueDate="ngModel" 
+        [(ngModel)]="rsvpDueDate2"
+        type="date" 
+        class="form-control"
+        required/>  
+  </div>
+  <div [hidden]="rsvpDueDate.valid || rsvpDueDate.pristine" class="alert alert-danger" style="max-width: 45rem; display: inline-block;">RSVP due date is required</div>
+  <button type="submit" class="btn btn-primary" [disabled]="!invitationForm.form.valid" (click)="submit()">Save</button>
+  <button *ngIf="canDelete" type="button" class="btn btn-secondary" (click)="delete()">Delete</button>
+</form>
+</div>
