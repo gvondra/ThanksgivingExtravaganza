@@ -49,7 +49,7 @@ export class InvitationService {
   }
 
   createResponse(id: string, invitationResponse: InvitationResponse) : Promise<InvitationResponse> {
-    return this.http.post("api/invitation" + id + "/response", invitationResponse, {
+    return this.http.post("api/invitation/" + id + "/response/", invitationResponse, {
       headers: new Headers({"Authorization": `Bearer ${localStorage.getItem('access_token')}`})
     })
     .toPromise()

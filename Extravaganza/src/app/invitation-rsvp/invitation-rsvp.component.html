@@ -1,3 +1,58 @@
-<p>
-  invitation-rsvp works!
-</p>
+<h2 style="text-align: center">You are Invited</h2>
+<div *ngIf="invitation" style="text-align: center">
+  <p>{{ invitation.Invitee }}, you are hereby invited to</p>
+  <h1 style="text-align: center">{{ invitation.Title }}</h1>
+  <p>happening on {{ formatDate(invitation.EventDate) }}</p>
+  <div>
+    <markdown-to-html markdown-to-html [data]="invitation.Note"></markdown-to-html>
+  </div>  
+  <p>RSVP, regrets only by {{ formatDate(invitation.RSVPDueDate) }}</p>
+  <div>
+      <form *ngIf="invitation" novalidate="novalidate" name="rsvpForm" #rsvpForm="ngForm">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox"
+            id="willAttend" 
+            name="willAttend" 
+            #willAttend="ngModel"            
+            [(ngModel)]="response.IsAttending"/>
+          <label class="form-check-label" for="willAttend">
+            Will attend
+          </label>
+        </div>
+        <div class="form-group">
+          <input id="attendees" 
+            name="attendees"
+            #attendees="ngModel"
+            [(ngModel)]="response.AttendeeCount"
+            class="form-control"
+            style="background-color: lightyellow; width: 5rem; display: inline-block;"
+            type="number"
+            pattern="^[0-9]{1,2}$"
+            required/>
+          <label for="attendees">attendees</label>
+        </div>
+        <div>
+        <div *ngIf="attendees.invalid && (attendees.dirty || attendees.touched)"
+          class="alert alert-danger" style="max-width: 45rem; display: inline-block;">
+          <div *ngIf="attendees.errors.required">
+            Attendee count is required
+          </div>
+          <div *ngIf="attendees.errors.pattern">
+            Invalid count
+          </div>
+        </div>
+        </div>
+        <div class="form-group">
+          <label style="vertical-align: top;" for="note">Notes</label>
+          <textarea id="note" 
+            name="note"
+            #note="ngModel"
+            [(ngModel)]="response.Note"
+            class="form-control"
+            style="background-color: lightyellow; width: 18rem; display: inline-block;"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!rsvpForm.form.valid" (click)="submit()">Submit RSVP</button>
+        <p *ngIf="rsvpMessage">{{ rsvpMessage }}</p>
+      </form>
+  </div>
+</div>

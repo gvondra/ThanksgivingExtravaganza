@@ -63,7 +63,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: "invitationrsvp",
+    path: "invitationrsvp/:id",
     component: InvitationRsvpComponent
   }
 ];

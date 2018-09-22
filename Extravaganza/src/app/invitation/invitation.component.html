@@ -63,5 +63,6 @@
   <div [hidden]="rsvpDueDate.valid || rsvpDueDate.pristine" class="alert alert-danger" style="max-width: 45rem; display: inline-block;">RSVP due date is required</div>
   <button type="submit" class="btn btn-primary" [disabled]="!invitationForm.form.valid" (click)="submit()">Save</button>
   <button *ngIf="canDelete" type="button" class="btn btn-secondary" (click)="delete()">Delete</button>
+  <button *ngIf="canDelete" type="button" class="btn btn-secondary" [routerLink]="['/invitationrsvp', invitation.InvitationId]">View RSVP</button>
 </form>
 </div>
