@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Invitation } from '../invitation';
-import { InvitationResponse } from '../invitation-response';
-import { InvitationService } from '../invitation.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Invitation } from '../models/invitation';
+import { InvitationResponse } from '../models/invitation-response';
+import { InvitationService } from '../services/invitation.service';
+
 @Component({
   selector: 'app-invitation',
   templateUrl: './invitation.component.html',
-  styleUrls: ['./invitation.component.css'],
-  providers: [ InvitationService ]
+  styles: [
+  ]
 })
 export class InvitationComponent implements OnInit {
 

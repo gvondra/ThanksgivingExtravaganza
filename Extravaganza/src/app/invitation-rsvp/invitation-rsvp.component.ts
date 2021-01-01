@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { MarkdownToHtmlService } from 'ng2-markdown-to-html';
-import { Invitation } from '../invitation';
-import { InvitationResponse } from '../invitation-response';
-import { InvitationService } from '../invitation.service';
+import { Invitation } from '../models/invitation';
+import { InvitationResponse } from '../models/invitation-response';
+import { InvitationService } from '../services/invitation.service';
 
 @Component({
   selector: 'app-invitation-rsvp',
   templateUrl: './invitation-rsvp.component.html',
-  styleUrls: ['./invitation-rsvp.component.css'],
-  providers: [ InvitationService, MarkdownToHtmlService ]
+  styles: [
+  ]
 })
 export class InvitationRsvpComponent implements OnInit {
 
