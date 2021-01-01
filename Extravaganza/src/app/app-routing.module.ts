@@ -1,25 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuardService as AuthGuard } from './auth-guard.service';
-import { HomeComponent } from './home/home.component';
-import { SponsorComponent } from './sponsor/sponsor.component';
 import { DisclaimerComponent } from './disclaimer/disclaimer.component';
-import { FoodComponent} from './food/food.component';
-import { PhotosComponent } from './photos/photos.component';
-import { CallbackComponent } from './callback/callback.component';
 import { FoodMenuItemComponent } from './food-menu-item/food-menu-item.component';
-import { InvitationsComponent } from './invitations/invitations.component';
-import { InvitationComponent } from './invitation/invitation.component';
+import { FoodComponent } from './food/food.component';
+import { HomeComponent } from './home/home.component';
 import { InvitationRsvpComponent } from './invitation-rsvp/invitation-rsvp.component';
+import { InvitationComponent } from './invitation/invitation.component';
+import { InvitationsComponent } from './invitations/invitations.component';
+import { PhotosComponent } from './photos/photos.component';
+import { SponsorComponent } from './sponsor/sponsor.component';
 
 const routes: Routes = [
   {
     path: "",
     component: HomeComponent
-  },
-  {
-    path: "callback",
-    component: CallbackComponent
   },
   {
     path: "sponsor",
@@ -35,13 +29,11 @@ const routes: Routes = [
   },
   {
     path: "menuItem",
-    component: FoodMenuItemComponent,
-    canActivate: [AuthGuard]
+    component: FoodMenuItemComponent
   },
   {
     path: "menuItem/:id",
-    component: FoodMenuItemComponent,
-    canActivate: [AuthGuard]
+    component: FoodMenuItemComponent
   },
   {
     path: "photos",
@@ -49,18 +41,15 @@ const routes: Routes = [
   },
   {
     path: "invitations",
-    component: InvitationsComponent,
-    canActivate: [AuthGuard]
+    component: InvitationsComponent
   },
   {
     path: "invitation",
-    component: InvitationComponent,
-    canActivate: [AuthGuard]
+    component: InvitationComponent
   },
   {
     path: "invitation/:id",
-    component: InvitationComponent,
-    canActivate: [AuthGuard]
+    component: InvitationComponent
   },
   {
     path: "invitationrsvp/:id",
@@ -70,7 +59,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-  providers: [AuthGuard]
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

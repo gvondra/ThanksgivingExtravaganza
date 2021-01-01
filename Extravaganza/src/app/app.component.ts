@@ -1,15 +1,10 @@
 import { Component } from '@angular/core';
 
-import { AuthService } from './auth.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styles: []
 })
 export class AppComponent {
   title = 'Thanksgiving Extravaganza';
-  constructor(public auth: AuthService) {
-    auth.handleAuthentication();
-  }
 }
