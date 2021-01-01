@@ -1,15 +1,15 @@
 <div style="overflow: auto; max-height: 555px;">
 <h1>Menu</h1>
 <p>Food is critical to Thanksgiving.  Lets break it down:</p>  
-<div *ngIf="canWrite">
-    <button class="btn btn-primary" type="button" routerLink="/menuItem">Add</button>
+<div>
+    <button class="btn btn-outline-primary" type="button" routerLink="/menuItem">Add</button>
 </div>
 <div *ngIf="menuItems">
     <div *ngFor="let i of menuItems">
         <h3>{{ i.Title }}</h3>
-        <a *ngIf="canWrite" [routerLink]="['/menuItem', i.MenuId]">edit</a>
+        <a [routerLink]="['/menuItem', i.MenuId]">edit</a>
         <div>
-            <markdown-to-html markdown-to-html [data]="i.Description"></markdown-to-html>
+            {{ i.Description }}
         </div>
     </div>
 </div>

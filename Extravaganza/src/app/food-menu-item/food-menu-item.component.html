@@ -28,5 +28,5 @@
         rows="5"></textarea>
   </div>
   <button type="submit" class="btn btn-primary" [disabled]="!itemForm.form.valid" (click)="submit()">Save</button>
-  <button *ngIf="canDelete" type="button" class="btn btn-secondary" (click)="delete()">Delete</button>
+  <button type="button" class="btn btn-secondary" (click)="delete()">Delete</button>
 </form>

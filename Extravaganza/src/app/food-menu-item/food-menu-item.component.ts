@@ -1,20 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { FoodMenu } from '../food-menu';
-import { FoodMenuService } from '../food-menu.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FoodMenu } from '../models/food-menu';
+import { FoodMenuService } from '../services/food-menu.service';
 
 @Component({
   selector: 'app-food-menu-item',
   templateUrl: './food-menu-item.component.html',
-  styleUrls: ['./food-menu-item.component.css'],
-  providers: [ FoodMenuService]
+  styles: [
+  ]
 })
 export class FoodMenuItemComponent implements OnInit {
 
   item: FoodMenu = null;
   errorMessage: string = null;
   save: any = null;
-  canDelete: boolean = false;
 
   constructor(private route: ActivatedRoute, 
     private router: Router,
@@ -23,13 +22,11 @@ export class FoodMenuItemComponent implements OnInit {
   ngOnInit() {
     this.route.params
     .subscribe(params => {
-      this.errorMessage = null;
-      this.canDelete = false;
-      if (params['id']){        
-        this.item = null;
+      this.errorMessage = null;      
+      this.item = null;
+      if (params['id']){  
         this.save = this.update;
         this.getItem(params['id'], this.menuService);
-        this.canDelete = true;
       } else {
         this.save = this.create;        
         this.createNewItem();
